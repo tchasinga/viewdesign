@@ -1,7 +1,24 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import { redis } from "../db/redis.js";
 
+
+
+
+const generateToken = async (userId) => {
+    const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+    });
+    const refreshToken = jwt.sign({ userId }, process.env.JWT_SECRET_REFRESH, {
+        expiresIn: "7d",
+    });
+    return { accessToken, refreshToken };
+}
+
+const storeRefreshToken = async (userId, refreshToken) => {
+    await redis.set(`refreshToken:${userId}`, refreshToken);
+}
 
 export const signup = async (req, res) => {
     const { name, email, password } = req.body;
@@ -25,7 +42,9 @@ export const signup = async (req, res) => {
     }
 
     try {
-
+      
+        // authenticate the user
+        const {accessToken, refreshToken} = await generateToken(user._id);
 
         // hash the password
         const salt = await bcrypt.genSalt(10);
@@ -33,7 +52,11 @@ export const signup = async (req, res) => {
 
         // create a new user
         const user = User.create({ name, email, password : hashedPassword });
-        res.status(201).json({ message: "User created successfully", user });
+        res.status(201).json({ message: "User created successfully", user :{
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        } });
 
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong" });
