@@ -18,7 +18,7 @@ app.listen(PORT,()=> {
 });
 
 // middleware
-
+app.use(express.json());
 
 // initialize endpoinds apis
 app.use("/api/auth", authRoutes);
