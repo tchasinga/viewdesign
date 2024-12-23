@@ -10,8 +10,5 @@ export const login = async (req, res) => {
     console.log("login controller");
 }
 
-export const logout = async (req, res) => {
-    console.log("logout controller");
-    res.send("logout controller");
+export const logout = async (req, res) => {  
 }
-
