@@ -80,8 +80,76 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    console.log("login controller");
+    try {
+		const { email, password } = req.body;
+		const user = await User.findOne({ email });
+
+		if (user && (await user.comparePassword(password))) {
+			const { accessToken, refreshToken } = generateTokens(user._id);
+			await storeRefreshToken(user._id, refreshToken);
+			setCookies(res, accessToken, refreshToken);
+
+			res.json({
+				_id: user._id,
+				name: user.name,
+				email: user.email,
+				role: user.role,
+                message: "Logged in successfully",
+			});
+		} else {
+			res.status(400).json({ message: "Invalid email or password" });
+		}
+	} catch (error) {
+		console.log("Error in login controller", error.message);
+		res.status(500).json({ message: error.message });
+	}
 }
 
+
+// this will refresh the access token
+export const refreshToken = async (req, res) => {
+	try {
+		const refreshToken = req.cookies.refreshToken;
+
+		if (!refreshToken) {
+			return res.status(401).json({ message: "No refresh token provided" });
+		}
+
+		const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH);
+		const storedToken = await redis.get(`refresh_token:${decoded.userId}`);
+
+		if (storedToken !== refreshToken) {
+			return res.status(401).json({ message: "Invalid refresh token" });
+		}
+
+		const accessToken = jwt.sign({ userId: decoded.userId }, process.env.JWT_SECRET, { expiresIn: "15m" });
+
+		res.cookie("accessToken", accessToken, {
+			httpOnly: true,
+			sameSite: "strict",
+			maxAge: 15 * 60 * 1000,
+		});
+
+		res.json({ message: "Token refreshed successfully" });
+	} catch (error) {
+		console.log("Error in refreshToken controller", error.message);
+		res.status(500).json({ message: "Server error", error: error.message });
+	}
+};
+
+
 export const logout = async (req, res) => {  
+    try {
+        const refreshToken = req.cookies.refreshToken;
+        if(refreshToken){
+            const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH);
+            await redis.del(`refresh_token:${decoded.userId}`);
+            res.clearCookie("accessToken");
+            res.clearCookie("refreshToken");
+            res.status(200).json({ message: "Logged out successfully" });
+        }
+    } catch (error) {
+        console.log("Error in logout controller", error.message);
+        res.status(500).json({ message: error.message });
+    }
 }

@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import linksToMogoDbUrl from "./db/linksToMogoDbUrl.js";
 import authRoutes from "./routes/auth.route.js";
 
@@ -19,6 +20,7 @@ app.listen(PORT,()=> {
 
 // middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // initialize endpoinds apis
 app.use("/api/auth", authRoutes);
