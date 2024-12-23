@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import linksToMogoDbUrl from "./db/linksToMogoDbUrl.js";
+import authRoutes from "./routes/auth.route.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -17,5 +18,9 @@ app.listen(PORT,()=> {
 });
 
 // middleware
+
+
+// initialize endpoinds apis
+app.use("/api/auth", authRoutes);
 
 
