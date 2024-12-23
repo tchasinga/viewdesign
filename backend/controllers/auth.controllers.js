@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import { redis } from "../db/redis.js";
+import { redis }  from "../db/redis.js";
 
 
 
@@ -19,6 +19,19 @@ const generateToken = async (userId) => {
 const storeRefreshToken = async (userId, refreshToken) => {
     await redis.set(`refreshToken:${userId}`, refreshToken, "EX", 7 * 24 * 60 * 60); // 7 days
     return true; 
+}
+
+const setCookies = (res, accessToken, refreshToken) => {
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 7 days
+      });
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 7 days
+      });
 }
 
 export const signup = async (req, res) => {
@@ -46,6 +59,9 @@ export const signup = async (req, res) => {
       
         // authenticate the user
         const {accessToken, refreshToken} = await generateToken(user._id);
+        await storeRefreshToken(user._id, refreshToken);
+
+        setCookies(res, accessToken, refreshToken);
 
         // hash the password
         const salt = await bcrypt.genSalt(10);
