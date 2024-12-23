@@ -17,7 +17,8 @@ const generateToken = async (userId) => {
 }
 
 const storeRefreshToken = async (userId, refreshToken) => {
-    await redis.set(`refreshToken:${userId}`, refreshToken);
+    await redis.set(`refreshToken:${userId}`, refreshToken, "EX", 7 * 24 * 60 * 60); // 7 days
+    return true; 
 }
 
 export const signup = async (req, res) => {
