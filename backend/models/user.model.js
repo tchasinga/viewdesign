@@ -18,11 +18,22 @@ const userSchema = new mongoose.Schema({
         trim: true,
 
     },
+    cartItems:[{
+        quantity:{
+            type:Number,
+            default:1
+        },
+        product:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Product"
+        }
+    }],
     role: {
         type: String,
         required: true,
         enum: ["admin", "user"],
-    },
+        default: "user",
+    }
 },{timestamps: true});
 
 // create a model using the schema
