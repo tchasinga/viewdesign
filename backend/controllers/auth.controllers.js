@@ -25,7 +25,16 @@ export const signup = async (req, res) => {
     }
 
     try {
-        
+
+
+        // hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // create a new user
+        const user = User.create({ name, email, password : hashedPassword });
+        res.status(201).json({ message: "User created successfully", user });
+
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong" });
     }
