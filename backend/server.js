@@ -5,6 +5,7 @@ import linksToMogoDbUrl from "./db/linksToMogoDbUrl.js";
 import authRoutes from "./routes/auth.route.js";
 import productsRoutes from "./routes/productsroutes.route.js";
 import cartRoutes from "./routes/cart.route.js";
+import cartCouponsRoutes from "./routes/cartcoupons.route.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
