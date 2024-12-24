@@ -153,3 +153,15 @@ export const logout = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+
+// Upcoming task for profile of a user...
+export const profile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        res.json(user);
+    } catch (error) {
+        console.log("Error in profile controller", error.message);
+        res.status(500).json({ message: error.message });
+    }
+}
