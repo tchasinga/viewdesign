@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProducts } from "../controllers/products.controllers";
+import { getAllProducts } from "../controllers/products.controllers.js";
 
 // initialize express and other port app
 const router = express.Router();
