@@ -74,8 +74,6 @@ export const createCheckoutSession = async (req, res) => {
 	}
 };
 
-
-
 export const checkoutSuccess = async (req, res) => {
 	try {
 		const { sessionId } = req.body;
@@ -129,8 +127,6 @@ async function createStripeCoupon(discountPercentage) {
 
 	return coupon.id;
 }
-
-
 
 // some additional code function
 
