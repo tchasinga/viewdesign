@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/add", protectRoute, addToCart);
 router.get("/get", protectRoute, getCart);
 router.delete("/remove", protectRoute, removeAllFromCart);
+router.put("/:id", protectRoute, updateQuantity);
 
 
 // exporting the router
