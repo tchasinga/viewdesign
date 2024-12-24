@@ -89,3 +89,5 @@ export const createProduct = async (req, res) => {
 	}
 
 }
+
+export const deleteProduct = async (req, res) => {}
