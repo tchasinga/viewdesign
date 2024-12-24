@@ -129,7 +129,6 @@ async function createStripeCoupon(discountPercentage) {
 }
 
 // some additional code function
-
 async function createStripeCoupon(discountPercentage) {
 	const coupon = await stripe.coupons.create({
 		percent_off: discountPercentage,
