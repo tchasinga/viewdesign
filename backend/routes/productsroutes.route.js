@@ -12,6 +12,7 @@ router.get("/category/:id", getProductByIdCategory);
 
 router.post("/createproductasadmin", protectRoute, adminRoute, createProduct);
 router.delete("/:id", protectRoute, adminRoute, deleteProduct);
+router.patch("/:id", protectRoute, adminRoute, toggleFeaturedProduct);
 
 
 // router.put("/:id", updateProduct);

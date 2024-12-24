@@ -152,3 +152,8 @@ export const getProductByIdCategory = async (req, res) => {
 		res.status(500).json({ message: "Server error", error: error.message });
 	}
 }
+
+
+export const toggleFeaturedProduct = async (req, res) => {
+    
+}
