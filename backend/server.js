@@ -32,4 +32,5 @@ app.use("/api/products", productsRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", cartCouponsRoutes);
 app.use("/api/payment", payementRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
