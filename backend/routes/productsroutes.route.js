@@ -9,6 +9,8 @@ router.get("/",protectRoute, adminRoute, getAllProducts);
 router.get("/featured", getFeaturedProducts);
 router.get("/recommended",protectRoute, getRecommendedProducts);
 
+// I'll add the free vesion of get recommended products later
+
 router.post("/createproductasadmin", protectRoute, adminRoute, createProduct);
 router.delete("/:id", protectRoute, adminRoute, deleteProduct);
 
