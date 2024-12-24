@@ -27,5 +27,7 @@ const productSchema = new mongoose.Schema({
         default: false,
     }
 },{timestamps: true});
+
+// create a model using the schema
 const Product = mongoose.model("Product", productSchema);
 export default Product;
