@@ -1,5 +1,5 @@
 import express from "express";
-import { createProduct, deleteProduct, getAllProducts, getFeaturedProducts, getRecommendedProducts } from "../controllers/products.controllers.js";
+import { createProduct, deleteProduct, getAllProducts, getFeaturedProducts, getProductByIdCategory, getRecommendedProducts, toggleFeaturedProduct } from "../controllers/products.controllers.js";
 import { adminRoute, protectRoute } from "../middleware/auth.middleware.js";
 
 // initialize express and other port app
