@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import linksToMogoDbUrl from "./db/linksToMogoDbUrl.js";
 import authRoutes from "./routes/auth.route.js";
+import productsRoutes from "./routes/productsroutes.route.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -24,5 +25,6 @@ app.use(cookieParser());
 
 // initialize endpoinds apis
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productsRoutes);
 
 
