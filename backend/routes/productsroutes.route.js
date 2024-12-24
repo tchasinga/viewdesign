@@ -4,7 +4,7 @@ import { getAllProducts } from "../controllers/products.controllers";
 // initialize express and other port app
 const router = express.Router();
 
-router.get("/", getAllProducts);
+router.get("/",protectedRouter, adminRoute, getAllProducts);
 router.get("/:id", getProductById);
 router.post("/", createProduct);
 router.put("/:id", updateProduct);
