@@ -8,11 +8,12 @@ const router = express.Router();
 router.get("/",protectRoute, adminRoute, getAllProducts);
 router.get("/featured", getFeaturedProducts);
 router.get("/recommended", getRecommendedProducts);
+router.get("/category/:id", getProductByIdCategory);
 
 router.post("/createproductasadmin", protectRoute, adminRoute, createProduct);
 router.delete("/:id", protectRoute, adminRoute, deleteProduct);
 
-// router.get("/:id", getProductById);
+
 // router.put("/:id", updateProduct);
 // router.delete("/:id", deleteProduct);
 
