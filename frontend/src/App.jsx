@@ -1,14 +1,15 @@
 import './App.css'
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
-import Homepages from './Pages/Homepages'
 import { Toaster } from 'react-hot-toast';
 
 import SignUpPage from './Pages/SignUpPage'
-// import Navbar from './Components/Navbars'
+import Navbar from './Components/Navbars'
 import LoginPage from './Pages/LoginPage'
+
 import { useEffect } from 'react';
 import { useUserStore } from './stores/useUserStore.js';
 import LoadingSpinner from './Components/LoadingSpinner.jsx';
+import HomePage from './Pages/HomePage.jsx';
 
 
 function App() {
@@ -39,10 +40,10 @@ function App() {
     {/* Background gradient */}
      <div className="relative z-50 pt-20">
       <BrowserRouter>
-        {/* <Navbar /> */}
+        <Navbar /> 
         <Toaster />
         <Routes>
-        <Route path='/' element={<Homepages />} />
+        <Route path='/' element={<HomePage />} />
 					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
 					<Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
           <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
