@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -8,6 +9,7 @@ import authRoutes from "./routes/auth.route.js";
 import productsRoutes from "./routes/productsroutes.route.js";
 import cartRoutes from "./routes/cart.route.js";
 import cartCouponsRoutes from "./routes/cartcoupons.route.js";
+
 import payementRoutes from "./routes/payment.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 
