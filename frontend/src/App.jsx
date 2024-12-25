@@ -1,9 +1,9 @@
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
-import Loginpages from './Pages/Loginpages'
+import Loginpages from './Pages/LoginPage'
 
-import SignUpPage from './Pages/Singuppages'
+import SignUpPage from './Pages/SignUpPage'
 import Navbar from './Components/Navbars'
 
 function App() {
