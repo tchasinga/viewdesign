@@ -15,7 +15,14 @@ const PORT = process.env.PORT || 8000;
 // initialize express and other port app
 const app = express();
 
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    allowedHeaders: "*", // or list specific headers if needed
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
+  })
+);
 
 
 app.listen(PORT,()=> {
