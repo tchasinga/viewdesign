@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "../lib/axios";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 
 export const useUserStore = create((set, get) => ({
@@ -16,7 +16,7 @@ export const useUserStore = create((set, get) => ({
 		}
 
 		try {
-			const res = await axios.post("/auth/signup", { name, email, password });
+			const res = await axios.post("http://localhost:8000/api/auth/signup", { name, email, password });
 			set({ user: res.data, loading: false });
 		} catch (error) {
 			set({ loading: false });
@@ -27,7 +27,7 @@ export const useUserStore = create((set, get) => ({
 		set({ loading: true });
 
 		try {
-			const res = await axios.post("/auth/login", { email, password });
+			const res = await axios.post("http://localhost:8000/api/auth/login", { email, password });
 
 			set({ user: res.data, loading: false });
 		} catch (error) {
@@ -48,7 +48,7 @@ export const useUserStore = create((set, get) => ({
 	checkAuth: async () => {
 		set({ checkingAuth: true });
 		try {
-			const response = await axios.get("/auth/profile");
+			const response = await axios.get("http://localhost:8000/api/auth/profile");
 			set({ user: response.data, checkingAuth: false });
 		} catch (error) {
 			console.log(error.message);
@@ -62,7 +62,7 @@ export const useUserStore = create((set, get) => ({
 
 		set({ checkingAuth: true });
 		try {
-			const response = await axios.post("/auth/refresh-token");
+			const response = await axios.post("http://localhost:8000/api/auth/refresh-token");
 			set({ checkingAuth: false });
 			return response.data;
 		} catch (error) {

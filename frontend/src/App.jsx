@@ -4,7 +4,7 @@ import Homepages from './Pages/Homepages'
 import { Toaster } from 'react-hot-toast';
 
 import SignUpPage from './Pages/SignUpPage'
-import Navbar from './Components/Navbars'
+// import Navbar from './Components/Navbars'
 import LoginPage from './Pages/LoginPage'
 
 function App() {
@@ -19,12 +19,12 @@ function App() {
     {/* Background gradient */}
      <div className="relative z-50 pt-20">
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <Toaster />
         <Routes>
           <Route path='/' element={<Homepages />} />
           <Route path='/login' element={<LoginPage />} />
-          <Route path='/singup' element={<SignUpPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
           <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
