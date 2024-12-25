@@ -2,8 +2,8 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
 import Loginpages from './Pages/Loginpages'
-import Singuppages from './Pages/Singuppages'
 import Navbars from './Components/Navbars'
+import SignUpPage from './Pages/Singuppages'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepages />} />
           <Route path='/login' element={<Loginpages />} />
-          <Route path='/singup' element={<Singuppages />} />
+          <Route path='/singup' element={<SignUpPage />} />
           <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
