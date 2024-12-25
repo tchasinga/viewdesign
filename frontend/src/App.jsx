@@ -21,6 +21,7 @@ function App() {
           <Route path='/' element={<Homepages />} />
           <Route path='/login' element={<Loginpages />} />
           <Route path='/singup' element={<Singuppages />} />
+          <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </div>
