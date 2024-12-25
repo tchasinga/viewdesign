@@ -2,8 +2,9 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
 import Loginpages from './Pages/Loginpages'
-import Navbars from './Components/Navbars'
+
 import SignUpPage from './Pages/Singuppages'
+import Navbar from './Components/Navbars'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
     {/* Background gradient */}
      <div className="relative z-50 pt-20">
       <BrowserRouter>
-        <Navbars />
+        <Navbar />
         <Routes>
           <Route path='/' element={<Homepages />} />
           <Route path='/login' element={<Loginpages />} />
