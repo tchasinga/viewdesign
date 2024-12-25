@@ -1,6 +1,7 @@
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
+import { Toaster } from 'react-hot-toast';
 
 import SignUpPage from './Pages/SignUpPage'
 import Navbar from './Components/Navbars'
@@ -19,6 +20,7 @@ function App() {
      <div className="relative z-50 pt-20">
       <BrowserRouter>
         <Navbar />
+        <Toaster />
         <Routes>
           <Route path='/' element={<Homepages />} />
           <Route path='/login' element={<LoginPage />} />
