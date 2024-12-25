@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+
 import linksToMogoDbUrl from "./db/linksToMogoDbUrl.js";
 import authRoutes from "./routes/auth.route.js";
 import productsRoutes from "./routes/productsroutes.route.js";
