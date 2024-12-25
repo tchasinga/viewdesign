@@ -38,10 +38,12 @@ app.listen(PORT,()=> {
 app.use(express.json());
 app.use(cookieParser());
 
+
 // initialize endpoinds apis
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/cart", cartRoutes);
+
 app.use("/api/coupons", cartCouponsRoutes);
 app.use("/api/payment", payementRoutes);
 app.use("/api/analytics", analyticsRoutes);
