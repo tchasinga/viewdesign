@@ -19,7 +19,6 @@ export const useUserStore = create((set, get) => ({
 			const res = await axios.post("http://localhost:8000/api/auth/signup", { name, email, password });
 			set({ user: res.data, loading: false });
 			toast.success("User created successfully");
-			return res.data;
 		} catch (error) {
 			set({ loading: false });
 			toast.error(error.response.data.message || "An error occurred");
@@ -31,8 +30,7 @@ export const useUserStore = create((set, get) => ({
 		try {
 			const res = await axios.post("http://localhost:8000/api/auth/login", { email, password });
 			set({ user: res.data, loading: false });
-			toast.success("Logged in successfully");
-			return res.data;
+			toast.success("Logged in successfully", { duration: 3000 });
 		} catch (error) {
 			set({ loading: false });
 			toast.error(error.response.data.message || "An error occurred");
@@ -67,7 +65,7 @@ export const useUserStore = create((set, get) => ({
 		try {
 			const response = await axios.post("http://localhost:8000/api/auth/refresh-token");
 			set({ checkingAuth: false });
-			return response.data;
+			set({ user: response.data });
 		} catch (error) {
 			set({ user: null, checkingAuth: false });
 			throw error;

@@ -1,13 +1,33 @@
 import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
 import { Toaster } from 'react-hot-toast';
 
 import SignUpPage from './Pages/SignUpPage'
 // import Navbar from './Components/Navbars'
 import LoginPage from './Pages/LoginPage'
+import { useEffect } from 'react';
+import { useUserStore } from './stores/useUserStore.js';
+import LoadingSpinner from './Components/LoadingSpinner.jsx';
+
 
 function App() {
+
+  const { user, checkAuth, checkingAuth } = useUserStore();
+
+	// const { getCartItems } = useCartStore();
+	useEffect(() => {
+		checkAuth();
+	}, [checkAuth]);
+
+	useEffect(() => {
+		if (!user) return;
+
+		// getCartItems();
+	}, [user]);
+
+	if (checkingAuth) return <LoadingSpinner />;
+
   return (
     <div className='min-h-screen bg-gray-900 text-white relative overflow-hidden'>
     {/* Background gradient */}
@@ -22,9 +42,9 @@ function App() {
         {/* <Navbar /> */}
         <Toaster />
         <Routes>
-          <Route path='/' element={<Homepages />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/' element={<Homepages />} />
+					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
+					<Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
           <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
