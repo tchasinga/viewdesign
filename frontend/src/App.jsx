@@ -1,10 +1,10 @@
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Homepages from './Pages/Homepages'
-import Loginpages from './Pages/LoginPage'
 
 import SignUpPage from './Pages/SignUpPage'
 import Navbar from './Components/Navbars'
+import LoginPage from './Pages/LoginPage'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Homepages />} />
-          <Route path='/login' element={<Loginpages />} />
+          <Route path='/login' element={<LoginPage />} />
           <Route path='/singup' element={<SignUpPage />} />
           <Route path='*' element={<h1 className='text-center text-3xl'>404 Not Found</h1>} />
         </Routes>
