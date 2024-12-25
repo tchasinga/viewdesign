@@ -95,6 +95,8 @@ export const login = async (req, res) => {
 				email: user.email,
 				role: user.role,
                 message: "Logged in successfully",
+				success: true,
+				
 			});
 		} else {
 			res.status(400).json({ message: "Invalid email or password" });

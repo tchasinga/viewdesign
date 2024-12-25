@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "../stores/useUserStore";
 
+
 const SignUpPage = () => {
+
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -14,9 +17,14 @@ const SignUpPage = () => {
 
 	const { signup, loading } = useUserStore();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		signup(formData);
+
+		// Call the signup function and await its completion
+		await signup(formData);
+
+		// Redirect to the login page after successful signup
+		navigate("/login");		
 	};
 
 	return (
